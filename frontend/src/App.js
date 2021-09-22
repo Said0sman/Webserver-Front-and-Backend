@@ -16,15 +16,14 @@ function alive() {
           //will always run
       })
 }
-function getProfiles(){
+function getProfile(){
       http.get('/users').then(function (res){
           console.log(res.data)
       }).catch(function (error){
           console.log(error)
       })
 }
-
-    function getProfilesById(id){
+function getProfilesById(id){
         http.get(`/users/${ id }` ).then(function (res){
             console.log(res.data)
         }).catch(function (error){
@@ -43,8 +42,7 @@ function createNewProfile(name,age,gender){
         console.log(error)
       })
 }
-
-    function updateProfile(id,name,age,gender){
+function updateProfile(id,name,age,gender){
         const payload  ={
             "id": id,
             "name": name,
@@ -57,6 +55,14 @@ function createNewProfile(name,age,gender){
             console.log(error)
         })
     }
+    function deleteProfileById(id){
+        http.delete(`/users/${ id }` ).then(function (res){
+            console.log(res.data)
+        }).catch(function (error){
+            console.log(error)
+        })
+    }
+
 
     return (
     <diiv>
@@ -64,10 +70,11 @@ function createNewProfile(name,age,gender){
         <p>{text}</p>
         <button onClick={ () => {setText('New ID')}}>Profile User</button>
         <button onClick={alive}>Alive</button>
-        <button onClick={getProfiles}>Check Profile</button>
+        <button onClick={getProfile}>Check Profile</button>
         <button onClick={() => {getProfilesById(11)}}>Get Profile Id</button>
         <button onClick={() => {createNewProfile( 'Alison Field', 55, 'Male')}}>Create New Profile</button>
-        <button onClick={() => {updateProfile( 14,'Alison Field', 56, 'Male')}}>Update Profile</button>
+        <button onClick={() => {updateProfile( 22,'Wilson Field', 65, 'Male')}}>Update Profile</button>
+        <button onClick={() => {deleteProfileById(14)}}>Delete Profile</button>
 
 
     </diiv>
