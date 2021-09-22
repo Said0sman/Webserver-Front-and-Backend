@@ -44,6 +44,19 @@ function createNewProfile(name,age,gender){
       })
 }
 
+    function updateProfile(id,name,age,gender){
+        const payload  ={
+            "id": id,
+            "name": name,
+            "age": age,
+            "gender": gender
+        }
+        http.put('/users',payload).then(function (res){
+            console.log(res.data)
+        }).catch(function (error){
+            console.log(error)
+        })
+    }
 
     return (
     <diiv>
@@ -54,6 +67,8 @@ function createNewProfile(name,age,gender){
         <button onClick={getProfiles}>Check Profile</button>
         <button onClick={() => {getProfilesById(11)}}>Get Profile Id</button>
         <button onClick={() => {createNewProfile( 'Alison Field', 55, 'Male')}}>Create New Profile</button>
+        <button onClick={() => {updateProfile( 14,'Alison Field', 56, 'Male')}}>Update Profile</button>
+
 
     </diiv>
   );
