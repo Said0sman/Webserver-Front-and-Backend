@@ -31,6 +31,19 @@ function getProfiles(){
             console.log(error)
         })
     }
+function createNewProfile(name,age,gender){
+      const payload  ={
+          "name": name,
+          "age": age,
+          "gender": gender
+      }
+      http.post('/users',payload).then(function (res){
+          console.log(res.data)
+    }).catch(function (error){
+        console.log(error)
+      })
+}
+
 
     return (
     <diiv>
@@ -40,6 +53,8 @@ function getProfiles(){
         <button onClick={alive}>Alive</button>
         <button onClick={getProfiles}>Check Profile</button>
         <button onClick={() => {getProfilesById(11)}}>Get Profile Id</button>
+        <button onClick={() => {createNewProfile( 'Alison Field', 55, 'Male')}}>Create New Profile</button>
+
     </diiv>
   );
 }
