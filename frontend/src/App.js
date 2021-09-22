@@ -116,12 +116,17 @@ function createProfileTable(){
             </div>
             <div>
 <section>
-    <h1>Get Profile </h1>
+    <h4>Get Profile </h4>
     <button onClick={createProfileTable}>Check Profile</button>
    <br/>
     <div>{profileTable}</div>
-
 </section>
+                <section>
+                    <h4>Create New Profile</h4>
+                    Name:<input type= 'text' id= 'name'/><br/>
+                    Age:<input type= 'text' id= 'age'/><br/>
+                    Gender:<input type= 'text' id= 'gender'/><br/>
+                    </section>
             </div>
 
     </div>
