@@ -2,9 +2,13 @@ import './App.css';
 import {useState} from "react";
 import http from  './utils/api/ProfileApi'
 
-function App() {
-  const [text, setText] = useState('Frontend API is alive ')
-function alive() {
+
+function App(){
+
+ const [text, setText] = useState('Frontend API is alive ')
+    const [viewProfile, setViewProfile] = useState()
+
+    function alive() {
       http.get('/')
           .then(function (res){
               console.log(res.data)
@@ -19,6 +23,7 @@ function alive() {
 function getProfile(){
       http.get('/users').then(function (res){
           console.log(res.data)
+          setViewProfile(res.data)
       }).catch(function (error){
           console.log(error)
       })
@@ -63,21 +68,54 @@ function updateProfile(id,name,age,gender){
         })
     }
 
+function createProfileTable(){
+let tableData = ''
+for(let i = 0; i < setViewProfile.length; i++){
+    tableData += `     
+     <tr>
+            <td>${viewProfile[i].id}</td>
+            <td>${viewProfile[i].name}</td>
+            <td>${viewProfile[i].age}</td>
+            <td>${viewProfile[i].gender}</td>
+ </tr>`
+}
 
+     return(
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+        </tr>
+        {tableData}
+    </table>
+)
+}
     return (
-    <diiv>
-<h2>Profile API with Axios</h2>
-        <p>{text}</p>
-        <button onClick={ () => {setText('New ID')}}>Profile User</button>
-        <button onClick={alive}>Alive</button>
-        <button onClick={getProfile}>Check Profile</button>
-        <button onClick={() => {getProfilesById(11)}}>Get Profile Id</button>
-        <button onClick={() => {createNewProfile( 'Alison Field', 55, 'Male')}}>Create New Profile</button>
-        <button onClick={() => {updateProfile( 22,'Wilson Field', 65, 'Male')}}>Update Profile</button>
-        <button onClick={() => {deleteProfileById(14)}}>Delete Profile</button>
 
+        <div>
+            <div>
+                    <h2>Profile API with Axios</h2>
+                    <p>{text}</p>
+                    <button onClick={ () => {setText('New ID')}}>Profile User</button>
+                    <button onClick={alive}>Alive</button>
+                    <button onClick={getProfile}>Check Profile</button>
+                    <button onClick={() => {getProfilesById(11)}}>Get Profile Id</button>
+                    <button onClick={() => {createNewProfile( 'Alison Field', 55, 'Male')}}>Create New Profile</button>
+                    <button onClick={() => {updateProfile( 22,'Wilson Field', 65, 'Male')}}>Update Profile</button>
+                    <button onClick={() => {deleteProfileById(14)}}>Delete Profile</button>
+            </div>
+            <div>
+<section>
+    <h1>Get Profile </h1>
+    <button onClick={getProfile}>Check Profile</button>
+   <br/>
 
-    </diiv>
+</section>
+            </div>
+
+    </div>
   );
 }
 
