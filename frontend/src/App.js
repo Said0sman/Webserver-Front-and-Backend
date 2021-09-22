@@ -16,6 +16,21 @@ function alive() {
           //will always run
       })
 }
+function getProfiles(){
+      http.get('/users').then(function (res){
+          console.log(res.data)
+      }).catch(function (error){
+          console.log(error)
+      })
+}
+
+    function getProfilesById(id){
+        http.get(`/users/${ id }` ).then(function (res){
+            console.log(res.data)
+        }).catch(function (error){
+            console.log(error)
+        })
+    }
 
     return (
     <diiv>
@@ -23,6 +38,8 @@ function alive() {
         <p>{text}</p>
         <button onClick={ () => {setText('New ID')}}>Profile User</button>
         <button onClick={alive}>Alive</button>
+        <button onClick={getProfiles}>Check Profile</button>
+        <button onClick={() => {getProfilesById(11)}}>Get Profile Id</button>
     </diiv>
   );
 }
