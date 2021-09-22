@@ -126,7 +126,7 @@ function deleteProfileById(id){
 }
 
 app.get('/', function (req, res){
-    res.send('API is Alive Backend!')
+    res.send('Backend API is alive !')
 })
 
 app.get('/users', function (req, res){

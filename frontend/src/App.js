@@ -3,11 +3,11 @@ import {useState} from "react";
 import http from  './utils/api/ProfileApi'
 
 function App() {
-  const [text, setText] = useState('API is Alive with Frontend')
+  const [text, setText] = useState('Frontend API is alive ')
 function alive() {
       http.get('/')
           .then(function (res){
-              console.log(res)
+              console.log(res.data)
           }).catch(function (error){
               //catch the error
               console.log(error)
