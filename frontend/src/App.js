@@ -7,6 +7,7 @@ function App(){
 
  const [text, setText] = useState('Frontend API is alive ')
     const [viewProfile, setViewProfile] = useState()
+    const [profileTable, setProfileTable] = useState()
 
     function alive() {
       http.get('/')
@@ -69,19 +70,21 @@ function updateProfile(id,name,age,gender){
     }
 
 function createProfileTable(){
-let tableData = ''
-for(let i = 0; i < setViewProfile.length; i++){
-    tableData += `     
+    http.get('/users').then(function (res){
+        console.log(res.data)
+        setViewProfile(res.data)
+        let tableData = ''
+        for(let i = 0; i < res.data.length; i++){
+            tableData += `     
      <tr>
-            <td>${viewProfile[i].id}</td>
-            <td>${viewProfile[i].name}</td>
-            <td>${viewProfile[i].age}</td>
-            <td>${viewProfile[i].gender}</td>
+            <td>${res.data[i].id}</td>
+            <td>${res.data[i].name}</td>
+            <td>${res.data[i].age}</td>
+            <td>${res.data[i].gender}</td>
  </tr>`
-}
+        }
 
-     return(
-    <table>
+        let returnTable = `  <table>
         <tr>
             <th>ID</th>
             <th>Name</th>
@@ -89,8 +92,13 @@ for(let i = 0; i < setViewProfile.length; i++){
             <th>Gender</th>
         </tr>
         {tableData}
-    </table>
-)
+    </table>`
+        setProfileTable(returnTable)
+
+    }).catch(function (error){
+        console.log(error)
+    })
+
 }
     return (
 
@@ -109,8 +117,9 @@ for(let i = 0; i < setViewProfile.length; i++){
             <div>
 <section>
     <h1>Get Profile </h1>
-    <button onClick={getProfile}>Check Profile</button>
+    <button onClick={createProfileTable}>Check Profile</button>
    <br/>
+    <div>{profileTable}</div>
 
 </section>
             </div>
