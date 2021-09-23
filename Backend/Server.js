@@ -33,7 +33,7 @@ function deleteProfile(index){
 }
 
 function updateProfile(userData){
-let index = getProfileIndex(userData.id)
+let index = getProfileIndex(Number(userData.id))
    if (index === -1){
        return {
            status: 400,
@@ -160,3 +160,4 @@ app.delete('/users/:id', function (req, res){
 app.listen(3001,  () => {
     console.log(`Server is running on port 3000`)
 })
+
