@@ -8,6 +8,11 @@ function App(){
  const [text, setText] = useState('Frontend API is alive ')
     const [viewProfile, setViewProfile] = useState()
     const [profileTable, setProfileTable] = useState()
+    const [name, setName] = useState()
+    const [age, setAge] = useState()
+    const [gender, setGender] = useState()
+    const [id, setId] = useState(0)
+
 
     function alive() {
       http.get('/')
@@ -29,18 +34,18 @@ function getProfile(){
           console.log(error)
       })
 }
-function getProfilesById(id){
-        http.get(`/users/${ id }` ).then(function (res){
+function getProfilesById(myId){
+        http.get(`/users/${ myId }` ).then(function (res){
             console.log(res.data)
         }).catch(function (error){
             console.log(error)
         })
     }
-function createNewProfile(name,age,gender){
+function createNewProfile(myName,myAge,myGender){
       const payload  ={
-          "name": name,
-          "age": age,
-          "gender": gender
+          "name": myName,
+          "age": myAge,
+          "gender": myGender
       }
       http.post('/users',payload).then(function (res){
           console.log(res.data)
@@ -48,12 +53,12 @@ function createNewProfile(name,age,gender){
         console.log(error)
       })
 }
-function updateProfile(id,name,age,gender){
-        const payload  ={
-            "id": id,
-            "name": name,
-            "age": age,
-            "gender": gender
+function updateProfile(myId,myName,myAge,myGender){
+     const payload  ={
+            "id": myId,
+            "name": myName,
+            "age": myAge,
+            "gender": myGender
         }
         http.put('/users',payload).then(function (res){
             console.log(res.data)
@@ -61,8 +66,8 @@ function updateProfile(id,name,age,gender){
             console.log(error)
         })
     }
-    function deleteProfileById(id){
-        http.delete(`/users/${ id }` ).then(function (res){
+    function deleteProfileById(myId){
+        http.delete(`/users/${ myId }` ).then(function (res){
             console.log(res.data)
         }).catch(function (error){
             console.log(error)
@@ -123,10 +128,20 @@ function createProfileTable(){
 </section>
                 <section>
                     <h4>Create New Profile</h4>
-                    Name:<input type= 'text' id= 'name'/><br/>
-                    Age:<input type= 'text' id= 'age'/><br/>
-                    Gender:<input type= 'text' id= 'gender'/><br/>
-                    </section>
+                    Name:<input type= 'text' id= 'name' onChange={event => setName(event.target.value)}/><br/>
+                    Age:<input type= 'number' min={0} id= 'age' onChange={event => setAge(event.target.value)}/><br/>
+                    Gender:<input type= 'text' id= 'gender' onChange={event => setGender(event.target.value)}/><br/>
+                <button onClick={() =>{createNewProfile(name,age,gender)}}>Get Profile</button>
+                </section>
+
+                <section>
+                    <h4>Update Profile</h4>
+                    Id:<input type= 'number'  min={0} id= 'name' value={id} onChange={event => setId(event.target.value)}/><br/>
+                    Name:<input type= 'text' id= 'name' value={name} onChange={event => setName(event.target.value)}/><br/>
+                    Age:<input type= 'number' min={0} id= 'age' value={age} onChange={event => setAge(event.target.value)}/><br/>
+                    Gender:<input type= 'text' id= 'gender' value={gender} onChange={event => setGender(event.target.value)}/><br/>
+                    <button onClick={() =>{updateProfile(id,name,age,gender)}}>Update Profile</button>
+                </section>
             </div>
 
     </div>
