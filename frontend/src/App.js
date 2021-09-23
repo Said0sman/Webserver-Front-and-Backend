@@ -142,6 +142,14 @@ function createProfileTable(){
                     Gender:<input type= 'text' id= 'gender' value={gender} onChange={event => setGender(event.target.value)}/><br/>
                     <button onClick={() =>{updateProfile(id,name,age,gender)}}>Update Profile</button>
                 </section>
+                <section>
+                    <h4>Delete Profile</h4>
+                    Id:<input type= 'number'  min={0} id= 'name' value={id} onChange={event => setId(event.target.value)}/><br/>
+                    Name:<input type= 'text' id= 'name' value={name} onChange={event => setName(event.target.value)}/><br/>
+                    Age:<input type= 'number' min={0} id= 'age' value={age} onChange={event => setAge(event.target.value)}/><br/>
+                    Gender:<input type= 'text' id= 'gender' value={gender} onChange={event => setGender(event.target.value)}/><br/>
+                    <button onClick={() =>{deleteProfileById(id)}}>Delete Profile</button>
+                </section>
             </div>
 
     </div>
