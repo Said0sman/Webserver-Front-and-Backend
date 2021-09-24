@@ -24,7 +24,7 @@ const buttons = {
 
 
 function getProfile(){
-      http.get('/users').then(function (res){
+      http.get('/getProfile').then(function (res){
           console.log(res.data)
           setViewProfile(res.data)
       }).catch(function (error){
@@ -32,7 +32,7 @@ function getProfile(){
       })
 }
 function getProfilesById(myId){
-        http.get(`/users/${ myId }` ).then(function (res){
+        http.get(`/checkProfile/${ myId }` ).then(function (res){
             console.log(res.data)
             viewProfile(res.data)
         }).catch(function (error){
@@ -45,7 +45,7 @@ function createNewProfile(myName,myAge,myGender){
           "age": myAge,
           "gender": myGender
       }
-      http.post('/users',payload).then(function (res){
+      http.post('/createProfile',payload).then(function (res){
           console.log(res.data)
           alert("You have created a new profile!");
     }).catch(function (error){
@@ -59,7 +59,7 @@ function updateProfile(myId,myName,myAge,myGender){
             "age": myAge,
             "gender": myGender
         }
-        http.put('/users',payload).then(function (res){
+        http.put('/updateProfile',payload).then(function (res){
             console.log(res.data)
             alert("Profile is updated!");
         }).catch(function (error){
@@ -67,7 +67,7 @@ function updateProfile(myId,myName,myAge,myGender){
         })
     }
     function deleteProfileById(myId){
-        http.delete(`/users/${ myId }` ).then(function (res){
+        http.delete(`/deleteProfile/${ myId }` ).then(function (res){
             console.log(res.data)
             alert("Profile deleted");
         }).catch(function (error){

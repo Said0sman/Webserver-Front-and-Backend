@@ -129,29 +129,29 @@ app.get('/', function (req, res){
     res.send('Backend API is alive !')
 })
 
-app.get('/users', function (req, res){
+app.get('/getProfile', function (req, res){
     res.json(myNewDatabase)
 })
 
-app.get('/users/:id', function (req, res){
+app.get('/checkProfile/:id', function (req, res){
     let response = getProfileById(Number(req.params.id))
     res.status(response.status).json(response.text)
 })
 
 
-app.post('/users', function (req, res){
+app.post('/createProfile', function (req, res){
     newProfile(req.body)
     res.json('You have created a new profile')
 })
 
 
 
-app.put('/users', function (req, res){
+app.put('/updateProfile', function (req, res){
  let response = updateProfile(req.body)
     res.status(response.status).send(response.text)
 })
 
-app.delete('/users/:id', function (req, res){
+app.delete('/deleteProfile/:id', function (req, res){
     let response = deleteProfileById(Number(req.params.id))
     res.status(response.status).json(response.text)
 })
