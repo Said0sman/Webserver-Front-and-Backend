@@ -8,6 +8,7 @@ function App(){
     const style = {
         backgroundColor: " #EDF6F3",
         color: "Darkblue",
+        padding: "10px",
     };
 const buttons = {
     color:  " #3E5D66"
