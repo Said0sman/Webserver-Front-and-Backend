@@ -5,6 +5,14 @@ import { JsonToTable} from "react-json-to-table";
 
 
 function App(){
+    const style = {
+        backgroundColor: " #EDF6F3",
+        color: "Darkblue",
+    };
+const buttons = {
+    color:  " #3E5D66"
+}
+
 
     const [viewProfile, setViewProfile] = useState()
     const [name, setName] = useState()
@@ -68,12 +76,12 @@ function updateProfile(myId,myName,myAge,myGender){
 
  return (
 
-        <div>
+        <div style={style}>
 
             <div>
  <section>
     <h3>Profile List </h3>
-    <button onClick={getProfile}>View Profile</button>
+    <button style={buttons} onClick={getProfile}>View Profile</button>
    <br/>
     <JsonToTable  json={viewProfile}/>
 </section>
@@ -82,7 +90,7 @@ function updateProfile(myId,myName,myAge,myGender){
                     Name:<input type= 'text' id= 'name' onChange={event => setName(event.target.value)}/><br/>
                     Age:<input type= 'number' min={0} id= 'age' onChange={event => setAge(event.target.value)}/><br/>
                     Gender:<input type= 'text' id= 'gender' onChange={event => setGender(event.target.value)}/><br/>
-                <button onClick={() =>{createNewProfile(name,age,gender)}}>Create</button>
+                <button style={buttons} onClick={() =>{createNewProfile(name,age,gender)}}>Create</button>
                 </section>
 
                 <section>
@@ -95,13 +103,13 @@ function updateProfile(myId,myName,myAge,myGender){
                                onChange={event => setAge(event.target.value)}/><br/>
                     Gender:<input type= 'text' id= 'gender' value={gender}
                                   onChange={event => setGender(event.target.value)}/><br/>
-                    <button onClick={() =>{updateProfile(id,name,age,gender)}}>Update</button>
+                    <button style={buttons} onClick={() =>{updateProfile(id,name,age,gender)}}>Update</button>
                 </section>
                 <section>
                     <h4>Delete Profile</h4>
                     Id:<input type= 'number'  min={0} id= 'name' value={id}
                               onChange={event => setId(event.target.value)}/><br/>
-                    <button onClick={() =>{deleteProfileById(id)}}>Delete</button>
+                    <button style={buttons} onClick={() =>{deleteProfileById(id)}}>Delete</button>
                 </section>
             </div>
 
