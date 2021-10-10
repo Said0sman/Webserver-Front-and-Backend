@@ -1,13 +1,14 @@
-`Dokumentation`
+ `Dokumentation`
+
 - Beskriv lite olika lösningar du gjort.
 
  Jag har skapat en Databas med Todos list samt att API hanterar Todos och det går att anropa för att lösa uppgiften.
 
-- `Beskriv något som var besvärligt att få till`
+- Beskriv något som var besvärligt att få till
 
   Det måste nog vara hur min Todos lista skulle se ut ungefär.
 
-- `Beskriv om du fått byta lösning och varför i sådana fall`
+- Beskriv om du fått byta lösning och varför i sådana fall
 
  Först arbetade jag med att skapa en enkel users api eftersom jag uppfattade att arbetet såg ut så,
  dock var det fel och det skedde en förändring och skapade istället en API som hanterar Todos.
