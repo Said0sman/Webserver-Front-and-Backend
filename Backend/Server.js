@@ -18,48 +18,48 @@ function incrementIdByOne(){
 }
 
 
-function newProfile(userData) {
+function newTodos(userData) {
     let user = {
         id: newId,
-        name: userData.name,
-        age: userData.age,
-        gender: userData.gender,
+        text: userData.text,
+        day: userData.day,
+        time: userData.time,
     }
     incrementIdByOne()
     myNewDatabase.push(user)
 }
-function deleteProfile(index){
+function deleteTodos(index){
     myNewDatabase.splice(index,1)
 }
 
-function updateProfile(userData){
-let index = getProfileIndex(Number(userData.id))
+function updateTodos(userData){
+let index = getTodosIndex(Number(userData.id))
    if (index === -1){
        return {
            status: 400,
-           text: 'Profile not found'
+           text: 'Sorry nothing is added to the your list'
        }
    }
    else{
 
-    if (myNewDatabase[index].name !== userData.name) {
-        myNewDatabase[index].name = userData.name;
+    if (myNewDatabase[index].text !== userData.text) {
+        myNewDatabase[index].text = userData.text;
     }
-    if (myNewDatabase[index].age !== userData.age) {
-        myNewDatabase[index].age = userData.age
+    if (myNewDatabase[index].day !== userData.day) {
+        myNewDatabase[index].day = userData.day
     }
-    if (myNewDatabase[index].gender !== userData.gender) {
-        myNewDatabase[index].gender = userData.gender
+    if (myNewDatabase[index].time !== userData.time) {
+        myNewDatabase[index].time = userData.time
     }
          return {
                 status: 200,
-                text: "Profile is updated!"
+                text: "List is now updated!"
             }
         }
 
 }
 
-function getProfileIndex(id){
+function getTodosIndex(id){
     for (let i = 0; i < myNewDatabase.length; i++)
         if (myNewDatabase[i].id === id) {
             return i
@@ -70,36 +70,36 @@ function getProfileIndex(id){
 let myNewDatabase = [
     {
         id: 10,
-        name: 'Alison Field',
-        age: 55,
-        gender: 'Male',
+        text: 'Im going to be training on',
+        day: 'Friday',
+        time: '17.00',
     },
     {
         id: 11,
-        name: 'Gibson Field',
-        age: 45,
-        gender: 'Male',
+        text: 'I will see you at work on',
+        day:  'Monday',
+        time: '10.00',
     },
     {
         id: 12,
-        name: 'Jenison Field',
-        age: 35,
-        gender: 'Female',
+        text: 'Im taking off this weekend and go for a trip',
+        day: 'Saturday',
+        time: '12.00',
     },
     {
         id: 13,
-        name: 'Tarason Field',
-        age: 25,
-        gender: 'Female',
+        text: 'Yes, we can book time for meeting on',
+        day: 'Thursday',
+        time: '20.00',
     },
 ]
 
-function getProfileById(id){
-let index = getProfileIndex(id)
+function getTodosById(id){
+let index = getTodosIndex(id)
     if (index === -1){
         return {
             status: 400,
-            text: 'Profile not found'
+            text: 'Sorry nothing is added to the your list'
         }
     } else {
         return {
@@ -109,18 +109,18 @@ let index = getProfileIndex(id)
     }
 }
 
-function deleteProfileById(id){
-    let index = getProfileIndex(id)
+function deleteTodosById(id){
+    let index = getTodosIndex(id)
     if (index === -1){
         return {
             status: 400,
-            text: 'Profile not found'
+            text: 'Sorry nothing is deleted from your list'
         }
     } else {
-       deleteProfile(index)
+       deleteTodos(index)
         return {
             status: 200,
-            text: 'Profile deleted!'
+            text: 'You have deleted from your list'
         }
     }
 }
@@ -128,31 +128,31 @@ function deleteProfileById(id){
 app.get('/', function (req, res){
     res.send('Backend API is alive !')
 })
-
-app.get('/getProfile', function (req, res){
+//getProfile
+app.get('/getTodos', function (req, res){
     res.json(myNewDatabase)
 })
-
-app.get('/checkProfile/:id', function (req, res){
-    let response = getProfileById(Number(req.params.id))
+//checkProfile/:id
+app.get('/myTodos/:id', function (req, res){
+    let response = getTodosById(Number(req.params.id))
     res.status(response.status).json(response.text)
 })
 
-
-app.post('/createProfile', function (req, res){
-    newProfile(req.body)
-    res.json('You have created a new profile')
+//createProfile
+app.post('/createTodos', function (req, res){
+    newTodos(req.body)
+    res.json('You have created Todo on the list')
 })
 
 
-
-app.put('/updateProfile', function (req, res){
- let response = updateProfile(req.body)
+//updateProfile
+app.put('/updateTodos', function (req, res){
+ let response = updateTodos(req.body)
     res.status(response.status).send(response.text)
 })
-
-app.delete('/deleteProfile/:id', function (req, res){
-    let response = deleteProfileById(Number(req.params.id))
+//deleteProfile
+app.delete('/deleteTodos/:id', function (req, res){
+    let response = deleteTodosById(Number(req.params.id))
     res.status(response.status).json(response.text)
 })
 

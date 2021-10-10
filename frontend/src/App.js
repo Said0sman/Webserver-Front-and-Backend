@@ -15,61 +15,61 @@ const buttons = {
 }
 
 
-    const [viewProfile, setViewProfile] = useState()
-    const [name, setName] = useState()
-    const [age, setAge] = useState()
-    const [gender, setGender] = useState()
+    const [viewTodos, setViewTodos] = useState()
+    const [text, setText] = useState()
+    const [day, setDay] = useState()
+    const [time, setTime] = useState()
     const [id, setId] = useState(0)
 
 
 
-function getProfile(){
-      http.get('/getProfile').then(function (res){
+function getTodos(){
+      http.get('/getTodos').then(function (res){
           console.log(res.data)
-          setViewProfile(res.data)
+          setViewTodos(res.data)
       }).catch(function (error){
           console.log(error)
       })
 }
-function getProfilesById(myId){
-        http.get(`/checkProfile/${ myId }` ).then(function (res){
+function getTodosById(myId){
+        http.get(`/myTodos/${ myId }` ).then(function (res){
             console.log(res.data)
-            viewProfile(res.data)
+            viewTodos(res.data)
         }).catch(function (error){
             console.log(error)
         })
     }
-function createNewProfile(myName,myAge,myGender){
+function createNewTodos(myText,myDay,myTime){
       const payload  ={
-          "name": myName,
-          "age": myAge,
-          "gender": myGender
+          "text": myText,
+          "day": myDay,
+          "time": myTime
       }
-      http.post('/createProfile',payload).then(function (res){
+      http.post('/createTodos',payload).then(function (res){
           console.log(res.data)
-          alert("You have created a new profile!");
+          alert("You have created Todo on the list'!");
     }).catch(function (error){
         console.log(error)
       })
 }
-function updateProfile(myId,myName,myAge,myGender){
+function updateTodos(myId,myText,myDay,myTime){
      const payload  ={
             "id": myId,
-            "name": myName,
-            "age": myAge,
-            "gender": myGender
+            "text": myText,
+            "day": myDay,
+            "time": myTime
         }
-        http.put('/updateProfile',payload).then(function (res){
+        http.put('/updateTodos',payload).then(function (res){
             console.log(res.data)
-            alert("Profile is updated!");
+            alert("List is now updated!");
         }).catch(function (error){
             console.log(error)
         })
     }
-    function deleteProfileById(myId){
-        http.delete(`/deleteProfile/${ myId }` ).then(function (res){
+    function deleteTodosById(myId){
+        http.delete(`/deleteTodos/${ myId }` ).then(function (res){
             console.log(res.data)
-            alert("Profile deleted");
+            alert("You have deleted from your list!");
         }).catch(function (error){
             console.log(error)
         })
@@ -81,36 +81,36 @@ function updateProfile(myId,myName,myAge,myGender){
 
             <div>
  <section>
-    <h3>Profile List </h3>
-    <button style={buttons} onClick={getProfile}>View Profile</button>
+    <h3>T0D0 List </h3>
+    <button style={buttons} onClick={getTodos}>View List</button>
    <br/>
-    <JsonToTable  json={viewProfile}/>
+    <JsonToTable  json={viewTodos}/>
 </section>
                 <section>
-                    <h4>New Profile</h4>
-                    Name:<input type= 'text' id= 'name' onChange={event => setName(event.target.value)}/><br/>
-                    Age:<input type= 'number' min={0} id= 'age' onChange={event => setAge(event.target.value)}/><br/>
-                    Gender:<input type= 'text' id= 'gender' onChange={event => setGender(event.target.value)}/><br/>
-                <button style={buttons} onClick={() =>{createNewProfile(name,age,gender)}}>Create</button>
+                    <h4>Add T0D0 in List</h4>
+                    T0D0:<input type= 'text' id= 'text' onChange={event => setText(event.target.value)}/><br/>
+                    Day:<input type= 'text'  id= 'day' onChange={event => setDay(event.target.value)}/><br/>
+                    Time:<input type= 'number' min={0} id= 'time' onChange={event => setTime(event.target.value)}/><br/>
+                <button style={buttons} onClick={() =>{createNewTodos(text,day,time)}}>Add</button>
                 </section>
 
                 <section>
-                    <h4>Update Profile</h4>
+                    <h4>Update T0D0 in List</h4>
                     Id:<input type= 'number'  min={0} id= 'name' value={id}
                               onChange={event => setId(event.target.value)}/><br/>
-                    Name:<input type= 'text' id= 'name' value={name}
-                                onChange={event => setName(event.target.value)}/><br/>
-                    Age:<input type= 'number' min={0} id= 'age' value={age}
-                               onChange={event => setAge(event.target.value)}/><br/>
-                    Gender:<input type= 'text' id= 'gender' value={gender}
-                                  onChange={event => setGender(event.target.value)}/><br/>
-                    <button style={buttons} onClick={() =>{updateProfile(id,name,age,gender)}}>Update</button>
+                    T0D0:<input type= 'text' id= 'text' value={text}
+                                onChange={event => setText(event.target.value)}/><br/>
+                    Day:<input type= 'text'  id= 'day' value={day}
+                               onChange={event => setDay(event.target.value)}/><br/>
+                    Time:<input type= 'number' min={0} id= 'time' value={time}
+                                  onChange={event => setTime(event.target.value)}/><br/>
+                    <button style={buttons} onClick={() =>{updateTodos(id,text,day,time)}}>Update</button>
                 </section>
                 <section>
-                    <h4>Delete Profile</h4>
+                    <h4>Delete T0D0 in List</h4>
                     Id:<input type= 'number'  min={0} id= 'name' value={id}
                               onChange={event => setId(event.target.value)}/><br/>
-                    <button style={buttons} onClick={() =>{deleteProfileById(id)}}>Delete</button>
+                    <button style={buttons} onClick={() =>{deleteTodosById(id)}}>Delete</button>
                 </section>
             </div>
 
