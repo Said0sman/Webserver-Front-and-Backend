@@ -2,6 +2,8 @@ import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import Logger from "./utils/Logger.js";
+import MorganMiddleware from "./middlewares/MorganMiddleware.js"
+import Middleware from "./middlewares/Middleware.js";
 
 dotenv.config()
 const app = express();
@@ -12,10 +14,12 @@ const dbCollection = process.env.MONGODB_COLLECTION
 
 app.use(cors({
     origin: '*',
-    //methods: ['GET','POST'. 'DELETE', 'PUT']
+    methods: ['GET','POST','DELETE', 'PUT']
 }))
 app.use(express.urlencoded({extended:false}))
 app.use(express.json())
+app.use(MorganMiddleware)
+app.use(Middleware.errorHandler)
 
 let newId = 14
 
@@ -150,7 +154,6 @@ app.post('/createTodos', function (req, res){
     res.json('You have created Todo on the list')
 })
 
-
 //updateProfile
 app.put('/updateTodos', function (req, res){
  let response = updateTodos(req.body)
@@ -162,8 +165,8 @@ app.delete('/deleteTodos/:id', function (req, res){
     res.status(response.status).json(response.text)
 })
 
+app.use(Middleware.notFound)
 
 app.listen(3001,  () => {
-    console.log(`Server is running on port 3001`)
     Logger.info(`Server is running http://localhost:${port}`)
 })
