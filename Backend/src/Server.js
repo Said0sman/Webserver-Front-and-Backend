@@ -1,25 +1,25 @@
 import express from 'express'
-import dotenv from 'dotenv'
 import cors from 'cors'
 import Logger from "./utils/Logger.js";
 import MorganMiddleware from "./middlewares/MorganMiddleware.js"
 import Middleware from "./middlewares/Middleware.js";
+import helmet from "helmet";
+import configuration from "./configuration/Configuration.js";
 
-dotenv.config()
+
 const app = express();
-const port = process.env.PORT
-const mongodb_url = process.env.MONGODB_URL
-const dbName = process.env.MONGODB_DB_NAME
-const dbCollection = process.env.MONGODB_COLLECTION
+
+app.use(helmet())
+app.use(MorganMiddleware)
+app.use(Middleware.errorHandler)
 
 app.use(cors({
     origin: '*',
-    methods: ['GET','POST','DELETE', 'PUT']
+   methods: ['GET','POST','DELETE', 'PUT']
 }))
 app.use(express.urlencoded({extended:false}))
 app.use(express.json())
-app.use(MorganMiddleware)
-app.use(Middleware.errorHandler)
+
 
 let newId = 14
 
@@ -167,6 +167,7 @@ app.delete('/deleteTodos/:id', function (req, res){
 
 app.use(Middleware.notFound)
 
-app.listen(3001,  () => {
-    Logger.info(`Server is running http://localhost:${port}`)
-})
+
+
+configuration.connectToDatabase()
+configuration.connectToPort(app)
