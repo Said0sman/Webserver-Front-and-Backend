@@ -1,4 +1,0 @@
-# create a new file .env
-# transfer my information to that file
-PORT=3000
-//const port = process.env.PORT

@@ -1,9 +1,14 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import cors from  'cors'
+import cors from 'cors'
 
 dotenv.config()
-const app = express()
+const app = express();
+const port = process.env.PORT
+const mongodb_url = process.env.MONGODB_URL
+const dbName = process.env.MONGODB_DB_NAME
+const dbCollection = process.env.MONGODB_COLLECTION
+
 app.use(cors({
     origin: '*',
     //methods: ['GET','POST'. 'DELETE', 'PUT']
