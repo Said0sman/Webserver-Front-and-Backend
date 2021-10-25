@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
+import Logger from "./utils/Logger.js";
 
 dotenv.config()
 const app = express();
@@ -164,4 +165,5 @@ app.delete('/deleteTodos/:id', function (req, res){
 
 app.listen(3001,  () => {
     console.log(`Server is running on port 3000`)
+    Logger.info(`Server is running http://localhost:${port}`)
 })
