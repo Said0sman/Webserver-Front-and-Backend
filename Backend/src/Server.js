@@ -5,7 +5,7 @@ import MorganMiddleware from "./middlewares/MorganMiddleware.js"
 import Middleware from "./middlewares/Middleware.js";
 import helmet from "helmet";
 import configuration from "./configuration/Configuration.js";
-import RoutesTodos from "./routes/RoutesTodos";
+import RoutesTodos from "./routes/RoutesTodos.js";
 
 
 const app = express();
