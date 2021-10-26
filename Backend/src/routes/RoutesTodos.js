@@ -1,10 +1,11 @@
 import ControllerTodos from "../controller/ControllerTodos.js";
 
 const routes = (app) => {
-    const todosUrl = '/getTodos'
+    const todosUrl = '/createdTodos'
 
     app.post(todosUrl, ControllerTodos.createTodos)
 }
+
 
 export default {
     routes
