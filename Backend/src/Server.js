@@ -5,6 +5,7 @@ import MorganMiddleware from "./middlewares/MorganMiddleware.js"
 import Middleware from "./middlewares/Middleware.js";
 import helmet from "helmet";
 import configuration from "./configuration/Configuration.js";
+import RoutesTodos from "./routes/RoutesTodos";
 
 
 const app = express();
@@ -164,6 +165,8 @@ app.delete('/deleteTodos/:id', function (req, res){
     let response = deleteTodosById(Number(req.params.id))
     res.status(response.status).json(response.text)
 })
+
+RoutesTodos.routes(app)
 
 app.use(Middleware.notFound)
 
