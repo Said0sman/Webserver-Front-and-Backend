@@ -5,13 +5,14 @@ dotenv.config()
 const dbCollection = process.env.MONGODB_COLLECTION
 
 const TodoSchema = new mongoose.Schema({
-    Text: String,
-    Day: String,
-    Time: Number
+    text: String,
+    day: String,
+    time: Number
 }, {
 timestamps:true
 })
 
-const TodoModel = new mongoose.model(dbCollection,TodoSchema)
+const ModelTodos = new mongoose.model(dbCollection,TodoSchema)
 
-export default TodoModel
+export default ModelTodos
+
