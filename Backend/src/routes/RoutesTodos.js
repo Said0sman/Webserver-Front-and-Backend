@@ -3,7 +3,7 @@ import ControllerTodos from "../controller/ControllerTodos.js";
 const routes = (app) => {
     const todosUrl = '/getTodos'
 
-    app.port(todosUrl, ControllerTodos.createTodos())
+    app.post(todosUrl, ControllerTodos.createTodos)
 }
 
 export default {
