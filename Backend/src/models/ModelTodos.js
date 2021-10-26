@@ -12,6 +12,6 @@ const TodoSchema = new mongoose.Schema({
 timestamps:true
 })
 
-const TodoModel = new mongoose.model(dbCollection, TodoSchema)
+const TodoModel = new mongoose.model(dbCollection,TodoSchema)
 
 export default TodoModel
