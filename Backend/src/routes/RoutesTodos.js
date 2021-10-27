@@ -10,6 +10,7 @@ const routes = (app) => {
     app.get(todosUrl, ControllerTodos.todoList)
     app.get(todoByIdUrl, ControllerTodos.todoById)
     app.get(findByDay, ControllerTodos.findTodoByDay)
+    app.put(todoByIdUrl, ControllerTodos.updateTodos)
 }
 
 
