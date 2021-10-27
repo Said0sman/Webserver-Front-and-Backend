@@ -22,7 +22,7 @@ const createTodos = async (req, res) => {
     }
 }
 
-const getTodoList  = async (req, res) => {
+const todoList  = async (req, res) => {
     try {
 const response = await ModelTodos.find({})
         Logger.debug(response)
@@ -32,9 +32,25 @@ const response = await ModelTodos.find({})
     }
 }
 
+const todoById  = async (req, res) => {
+    const id = req.params.id
+    try {
+        Logger.http(`req.params.id: ${id}`)
+        const response = await ModelTodos.findById(id)
+        Logger.debug(response)
+        res.status(200).send(response)
+    } catch (error){
+        res.status(500).send({message:`Error occurred while retrieving Todo with id ${id}`,
+            error: error.message})
+    }
+}
+
+
+
 
 
 export default {
     createTodos,
-    getTodoList
+    todoList,
+    todoById
 }
