@@ -11,6 +11,7 @@ const routes = (app) => {
     app.get(todoByIdUrl, ControllerTodos.todoById)
     app.get(findByDay, ControllerTodos.findTodoByDay)
     app.put(todoByIdUrl, ControllerTodos.updateTodos)
+    app.delete(todoByIdUrl, ControllerTodos.deleteTodos)
 }
 
 

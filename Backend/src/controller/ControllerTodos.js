@@ -1,7 +1,7 @@
 import ModelTodos from "../models/ModelTodos.js";
 import Logger from "../utils/Logger.js";
 
-//Create Some Todos
+//Create Todos in the List
 const createTodos = async (req, res) => {
     Logger.http(req.body)
 
@@ -46,6 +46,7 @@ const todoById  = async (req, res) => {
             error: error.message})
     }
 }
+
 //Find Todos with Day
 const findTodoByDay  = async (req, res) => {
     const todoDay = req.query.day
@@ -62,7 +63,8 @@ const findTodoByDay  = async (req, res) => {
             error: error.message})
     }
 }
-//Update your List in Todos
+
+//Update Todos in the List
 const updateTodos = async (req, res) => {
     let todoId
     let body
@@ -90,11 +92,32 @@ const response = await ModelTodos.findByIdAndUpdate(todoId, {
     }
 }
 
+//Delete Todos in the List
+const deleteTodos = async (req,res) => {
+    let todoId
+    try{
+        todoId = req.params.id
+        Logger.http(todoId)
+        const response = await ModelTodos.findByIdAndUpdate(todoId)
+       Logger.debug(response)
+        res.status(200).send(`You have now successfully delete todo in the list`)
+    } catch (error){
+        res.status(500).send({
+            message:`Error occurred while trying to delete todo in list with id ${todoId}`,
+            error: error.message
+        })
+    }
+}
 
+
+
+
+//Exports
 export default {
     createTodos,
     todoList,
     todoById,
     findTodoByDay,
-    updateTodos
+    updateTodos,
+    deleteTodos
 }
