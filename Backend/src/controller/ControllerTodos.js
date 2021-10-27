@@ -22,10 +22,19 @@ const createTodos = async (req, res) => {
     }
 }
 
-
+const getTodoList  = async (req, res) => {
+    try {
+const response = await ModelTodos.find({})
+        Logger.debug(response)
+        res.status(200).send(response)
+    } catch (error){
+        res.status(500).send({message:error.message})
+    }
+}
 
 
 
 export default {
     createTodos,
+    getTodoList
 }
