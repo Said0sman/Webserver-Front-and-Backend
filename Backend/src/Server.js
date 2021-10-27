@@ -139,6 +139,7 @@ function deleteTodosById(id){
 app.get('/', function (req, res){
     res.send('Backend API is alive !')
 })
+
 //getProfile
 app.get('/getTodos', function (req, res){
     res.json(myNewDatabase)
