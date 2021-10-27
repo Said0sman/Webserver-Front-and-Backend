@@ -1,7 +1,7 @@
 import ModelTodos from "../models/ModelTodos.js";
 import Logger from "../utils/Logger.js";
 
-
+//Create Some Todos
 const createTodos = async (req, res) => {
     Logger.http(req.body)
 
@@ -22,6 +22,7 @@ const createTodos = async (req, res) => {
     }
 }
 
+//Find Todos List
 const todoList  = async (req, res) => {
     try {
 const response = await ModelTodos.find({})
@@ -32,6 +33,7 @@ const response = await ModelTodos.find({})
     }
 }
 
+//Get Todos By the Id
 const todoById  = async (req, res) => {
     const id = req.params.id
     try {
@@ -40,17 +42,32 @@ const todoById  = async (req, res) => {
         Logger.debug(response)
         res.status(200).send(response)
     } catch (error){
-        res.status(500).send({message:`Error occurred while retrieving Todo with id ${id}`,
+        res.status(500).send({message:`Error occurred while retrieving Todos with id ${id}`,
+            error: error.message})
+    }
+}
+//Find Todos with Day
+const findTodoByDay  = async (req, res) => {
+    const todoDay= req.query.day
+    try {
+        Logger.http(`req.params.day: ${todoDay}`)
+        const response = await ModelTodos.find({day: todoDay})
+        Logger.debug(response)
+        response.length !== 0
+           ? res.status(200).send(response)
+            :res.status(404).send(`Error no days found on todos: "${todoDay}"`)
+
+    } catch (error){
+        res.status(500).send({message:`Error occurred while retrieving Todos with day ${todoDay}`,
             error: error.message})
     }
 }
 
 
 
-
-
 export default {
     createTodos,
     todoList,
-    todoById
+    todoById,
+    findTodoByDay
 }
