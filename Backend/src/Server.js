@@ -29,7 +29,7 @@ function incrementIdByOne(){
 }
 
 
-function newTodos(userData) {
+function newTodos (userData) {
     let user = {
         id: newId,
         text: userData.text,
