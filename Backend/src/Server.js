@@ -171,8 +171,6 @@ RoutesTodos.routes(app)
 
 app.use(Middleware.notFound)
 
-
-
 configuration.connectToDatabase()
 configuration.connectToPort(app)
 
