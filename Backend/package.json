@@ -5,8 +5,8 @@
   "main": "src/Server.js",
   "type": "module",
   "scripts": {
-    "test": "mocha 'tests/**'",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "node ./node_modules/mocha/bin/mocha"
   },
   "keywords": [
     "RestAPI",

@@ -7,8 +7,8 @@ import helmet from "helmet";
 import configuration from "./configuration/Configuration.js";
 import RoutesTodos from "./routes/RoutesTodos.js";
 
-
 const app = express();
+
 
 app.use(helmet())
 app.use(MorganMiddleware)
@@ -153,7 +153,7 @@ app.get('/myTodos/:id', function (req, res){
 //createProfile
 app.post('/createTodos', function (req, res){
     newTodos(req.body)
-    res.json('You have created Todo on the list')
+    res.json(req.body)
 })
 
 //updateProfile
@@ -175,3 +175,5 @@ app.use(Middleware.notFound)
 
 configuration.connectToDatabase()
 configuration.connectToPort(app)
+
+export default app

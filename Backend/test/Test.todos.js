@@ -5,12 +5,24 @@ import app from "../src/Server.js"
 
 Chai.should()
 Chai.use(ChaiHTTP)
-// Test for Existing
-const testingNonExistingRoute = () => {
+
+const randomString = Math.random().toString(36).substring(7)
+let myTodoId = '617943c7542fec4485f31998'
+const todo = {
+    text: randomString,
+    day: randomString,
+}
+
+const todosRoute = '/Todos'
+const todosRouteId = `${todosRoute}/:myTodosId`
+const findByDayRoute = '/findByDay'
+
+
+const testIfRouteWorks = () => {
     describe('Test a route that does not exist', () => {
         test('Expecting 404 not found', (done) => {
             Chai.request(app)
-                .get('/randomURL')
+                .get(`/${ randomString }`)
                 .end((request, response) => {
                     response.should.have.a.status(404)
                     done()
@@ -19,7 +31,9 @@ const testingNonExistingRoute = () => {
     })
 }
 
-//Exports
-describe('TESTING THE TODOS_API ROUTE', () => {
-    testingNonExistingRoute()
+
+describe('Testing the TODO_API',  ()=> {
+testIfRouteWorks()
+
 })
+
