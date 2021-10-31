@@ -62,12 +62,43 @@ const testUpdateTodos = () => {
         })
     })
 }
+const testCreateTodo = () => {
+    describe('Test if POST is creating and working correctly', () => {
+        test('Expecting to create a todo', (done) => {
+            Chai.request(app)
+                .post(todosRoute)
+                .send(todo)
+                .end((error, response) => {
+                    response.should.have.a.status(200)
+                    response.body.should.be.a('object')
+                    myTodoId = response.body._id
+                    response.body.should.have.property('text').eq(todo.text)
+                    response.body.should.have.property('day').eq(todo.day)
+                    done()
+                })
+        })
+    })
+}
 
+const testDeleteTodos = () => {
+    describe('Test if Delete is working correctly', () => {
+        test('Expecting to delete with Id in the todo list', (done) => {
+            Chai.request(app)
+                .delete(`${todosRoute}/${myTodoId}`)
+                .end((error, response) => {
+                    response.should.have.status(200)
+                    done()
+                })
+        })
+    })
+}
 
 
 describe('Testing the TODO_API',  ()=> {
 testIfRouteWorks()
 testTodoList()
 testUpdateTodos()
+testCreateTodo()
+testDeleteTodos()
 })
 
