@@ -45,7 +45,7 @@ function createNewTodos(myText,myDay,myTime){
           "day": myDay,
           "time": myTime
       }
-      http.post('/createTodos',payload).then(function (res){
+      http.post('/Todos',payload).then(function (res){
           console.log(res.data)
           alert("You have created Todo on the list'!");
     }).catch(function (error){
