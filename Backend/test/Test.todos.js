@@ -45,9 +45,29 @@ const testTodoList = () => {
     })
 }
 
+const testUpdateTodos = () => {
+    describe('Test if PUT is updating and working correctly', () => {
+        test('Expecting to update a todo with a valid ID', (done) => {
+            Chai.request(app)
+                .put(`${todosRoute}/${myTodoId}`)
+                .send(todo)
+                .end((error, response) => {
+                    response.should.have.status(200)
+                    response.body.should.be.a('object')
+                    response.body.should.have.property('_id').eq(myTodoId)
+                    response.body.should.have.property('text').eq(todo.text)
+                    response.body.should.have.property('day').eq(todo.day)
+                    done()
+                })
+        })
+    })
+}
+
+
 
 describe('Testing the TODO_API',  ()=> {
 testIfRouteWorks()
 testTodoList()
+testUpdateTodos()
 })
 
