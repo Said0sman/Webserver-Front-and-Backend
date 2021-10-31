@@ -30,10 +30,24 @@ const testIfRouteWorks = () => {
         })
     })
 }
+const testTodoList = () => {
+    describe('Test if GET is accessing to todo list', () => {
+        test('Expecting to return all in the todoList', (done) => {
+            Chai.request(app)
+                .get(todosRoute)
+                .end((error, response) => {
+                    response.should.have.status(200)
+                    response.body.should.be.a('Array')
+                    response.body.length.should.be.eq(response.body.length)
+                    done()
+                })
+        })
+    })
+}
 
 
 describe('Testing the TODO_API',  ()=> {
 testIfRouteWorks()
-
+testTodoList()
 })
 
